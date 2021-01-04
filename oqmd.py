@@ -79,8 +79,8 @@ property=pd.read_csv("exp_data/experimental_prop.csv").values[:,1]
 id_property=[]
 count=1
 for i in range(len(data)):
-    composition=data[436]
-    delta = property[436]
+    composition=data[i]
+    delta = property[i]
     print(i, composition)
     with rester.QMPYRester() as q:
         args = {
