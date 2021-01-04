@@ -80,8 +80,8 @@ out = open("data.txt", "w")
 id_property=[]
 count=1
 for i in range(len(data)):
-    composition=data[i]
-    delta = property[i]
+    composition=data[436]
+    delta = property[436]
     print(i, composition)
     with rester.QMPYRester() as q:
         args = {
@@ -89,10 +89,11 @@ for i in range(len(data)):
             "composition": composition
             }
         list_of_data = q.get_oqmd_phases(**args)
-    if (len(list_of_data['data'])>0):
-        structure=list_of_data['data'][0]
-        write_poscar(structure,count)
-        id_property.append([count,delta])
-        count=count+1
+    if(list_of_data['data'] !=None):
+        if (len(list_of_data['data'])>0):
+            structure=list_of_data['data'][0]
+            write_poscar(structure,count)
+            id_property.append([count,delta])
+            count=count+1
 my_df = pd.DataFrame(id_property)
 my_df.to_csv('exp_data/id_prop.csv', index=False, header=False)
