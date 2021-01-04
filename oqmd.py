@@ -88,11 +88,11 @@ for i in range(len(data)):
             "composition": composition
             }
         list_of_data = q.get_oqmd_phases(**args)
-    if(list_of_data['data'] !=None):
-        if (len(list_of_data['data'])>0):
-            structure=list_of_data['data'][0]
-            write_poscar(structure,count)
-            id_property.append([count,delta])
-            count=count+1
+    # if(list_of_data['data'] !=None):
+    if (len(list_of_data['data'])>0):
+        structure=list_of_data['data'][0]
+        write_poscar(structure,count)
+        id_property.append([count,delta])
+        count=count+1
 my_df = pd.DataFrame(id_property)
 my_df.to_csv('exp_data/id_prop.csv', index=False, header=False)
