@@ -10,7 +10,7 @@ import pandas as pd
 def write_poscar(structure,index):
     name_list=[]
     count_list=[]
-    out = open('exp_data/'+str(index+1) + ".vasp", "w")
+    out = open('exp_data/'+str(index) + ".vasp", "w")
     site_count={}
     sites_list=[]
     sites = structure["sites"]
