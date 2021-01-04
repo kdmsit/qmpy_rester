@@ -76,7 +76,6 @@ def write_poscar(structure,index):
 
 data=pd.read_csv("exp_data/experimental_prop.csv").values[:,0]
 property=pd.read_csv("exp_data/experimental_prop.csv").values[:,1]
-out = open("data.txt", "w")
 id_property=[]
 count=1
 for i in range(len(data)):
