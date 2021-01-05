@@ -22,7 +22,7 @@ for file in os.listdir('%s'%(path)):
 print(np.size(list))
 
 for z in list:
-    name=z.split('.')[0]
+    name=int(z.split('.')[0])
     bulk=read('exp_data/'+str(z),format='vasp')
-    filename='exp_cif/'+name+'.cif'
+    filename='exp_cif/'+str(name)+'.cif'
     ase.io.write(filename,bulk)

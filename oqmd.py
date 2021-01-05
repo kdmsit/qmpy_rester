@@ -10,7 +10,7 @@ import pandas as pd
 def write_poscar(structure,index):
     name_list=[]
     count_list=[]
-    out = open('exp_data/'+str(index) + ".vasp", "w")
+    out = open('exp_data_bgap/'+str(index) + ".vasp", "w")
     site_count={}
     sites_list=[]
     sites = structure["sites"]
@@ -91,8 +91,9 @@ for i in range(len(data)):
     # if(list_of_data['data'] !=None):
     if (len(list_of_data['data'])>0):
         structure=list_of_data['data'][0]
+        bgap=structure['band_gap']
         write_poscar(structure,count)
         id_property.append([count,delta])
         count=count+1
 my_df = pd.DataFrame(id_property)
-my_df.to_csv('exp_data/id_prop.csv', index=False, header=False)
+my_df.to_csv('exp_data_bgap/id_prop.csv', index=False, header=False)
