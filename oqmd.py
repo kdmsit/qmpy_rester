@@ -93,7 +93,7 @@ for i in range(len(data)):
         structure=list_of_data['data'][0]
         bgap=structure['band_gap']
         write_poscar(structure,count)
-        id_property.append([count,delta])
+        id_property.append([count,delta,bgap])
         count=count+1
 my_df = pd.DataFrame(id_property)
 my_df.to_csv('exp_data_bgap/id_prop.csv', index=False, header=False)
