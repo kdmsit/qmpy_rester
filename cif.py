@@ -13,7 +13,7 @@ import ase.io.vasp
 ## Run this script in the directory
 ## where all the .POSCAR files are there
 
-path='exp_data/'
+path='exp_data_bgap/'
 list=[]
 for file in os.listdir('%s'%(path)):
     if fnmatch.fnmatch(file, '*.vasp'):
@@ -23,6 +23,6 @@ print(np.size(list))
 
 for z in list:
     name=int(z.split('.')[0])
-    bulk=read('exp_data/'+str(z),format='vasp')
-    filename='exp_cif/'+str(name)+'.cif'
+    bulk=read('exp_data_bgap/'+str(z),format='vasp')
+    filename='exp_cif_bgap/'+str(name)+'.cif'
     ase.io.write(filename,bulk)

@@ -10,7 +10,7 @@ import pandas as pd
 def write_poscar(structure,index):
     name_list=[]
     count_list=[]
-    out = open('exp_data_bgap/'+str(index) + ".vasp", "w")
+    out = open('data_poscar/'+str(index) + ".vasp", "w")
     site_count={}
     sites_list=[]
     sites = structure["sites"]
@@ -73,12 +73,13 @@ def write_poscar(structure,index):
 
 
 
-
-data=pd.read_csv("exp_data/experimental_prop.csv").values[:,0]
-property=pd.read_csv("exp_data/experimental_prop.csv").values[:,1]
+out = open("out.txt", "w")
+data=pd.read_csv("experimental_prop.csv").values[:,0]
+property=pd.read_csv("experimental_prop.csv").values[:,1]
 id_property=[]
 count=1
 for i in range(len(data)):
+# for i in range(20):
     composition=data[i]
     delta = property[i]
     print(i, composition)
@@ -88,12 +89,20 @@ for i in range(len(data)):
             "composition": composition
             }
         list_of_data = q.get_oqmd_phases(**args)
-    # if(list_of_data['data'] !=None):
-    if (len(list_of_data['data'])>0):
-        structure=list_of_data['data'][0]
-        bgap=structure['band_gap']
-        write_poscar(structure,count)
-        id_property.append([count,delta,bgap])
-        count=count+1
+    if(list_of_data['data'] !=None):
+        if (len(list_of_data['data'])>0):
+            structure=list_of_data['data'][0]
+            bgap=structure['band_gap']
+            write_poscar(structure,count)
+            id_property.append([count,delta,bgap])
+            count=count+1
+        else:
+            out.writelines(composition)
+            out.writelines("\n")
+
+    else:
+        out.writelines(composition)
+        out.writelines("\n")
 my_df = pd.DataFrame(id_property)
-my_df.to_csv('exp_data_bgap/id_prop.csv', index=False, header=False)
+my_df.to_csv('data_poscar/id_prop.csv', index=False, header=False)
+out.close()
