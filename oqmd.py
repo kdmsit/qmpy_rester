@@ -97,7 +97,7 @@ for i in range(len(data)):
             id_property.append([count,delta,bgap])
             count=count+1
         else:
-            out.writelines(i,composition)
+            out.writelines(str(i)+" : "+composition)
             out.writelines("\n")
 
     else:
