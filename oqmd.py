@@ -78,8 +78,8 @@ data=pd.read_csv("experimental_prop.csv").values[:,0]
 property=pd.read_csv("experimental_prop.csv").values[:,1]
 id_property=[]
 count=1
-for i in range(len(data)):
-# for i in range(20):
+# for i in range(len(data)):
+for i in range(20):
     composition=data[i]
     delta = property[i]
     print(i, composition)
@@ -97,7 +97,7 @@ for i in range(len(data)):
             id_property.append([count,delta,bgap])
             count=count+1
         else:
-            out.writelines(composition)
+            out.writelines(i,composition)
             out.writelines("\n")
 
     else:
