@@ -76,10 +76,11 @@ def write_poscar(structure,index):
 out = open("out.txt", "w")
 data=pd.read_csv("experimental_prop.csv").values[:,0]
 property=pd.read_csv("experimental_prop.csv").values[:,1]
+fetched_data=[]
 id_property=[]
 count=1
-for i in range(len(data)):
-# for i in range(20):
+# for i in range(len(data)):
+for i in range(50):
     composition=data[i]
     delta = property[i]
     print(i, composition)
@@ -93,8 +94,10 @@ for i in range(len(data)):
         if (len(list_of_data['data'])>0):
             structure=list_of_data['data'][0]
             bgap=structure['band_gap']
+            delta_dft=structure['delta_e']
             write_poscar(structure,count)
             id_property.append([count,delta,bgap])
+            fetched_data.append([composition,delta,delta_dft,bgap])
             count=count+1
         else:
             out.writelines(str(i)+" : "+composition)
@@ -105,4 +108,6 @@ for i in range(len(data)):
         out.writelines("\n")
 my_df = pd.DataFrame(id_property)
 my_df.to_csv('data_poscar/id_prop.csv', index=False, header=False)
+my_df = pd.DataFrame(fetched_data)
+my_df.to_csv('fetched_data.csv', index=False, header=False)
 out.close()
