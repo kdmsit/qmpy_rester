@@ -79,8 +79,8 @@ property=pd.read_csv("experimental_prop.csv").values[:,1]
 fetched_data=[]
 id_property=[]
 count=1
-# for i in range(len(data)):
-for i in range(50):
+for i in range(len(data)):
+#for i in range(50):
     composition=data[i]
     delta = property[i]
     print(i, composition)
