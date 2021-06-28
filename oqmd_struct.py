@@ -1,16 +1,9 @@
-
-
 from qmpy_rester import *
-# import qmpy as qmpy
-import  pickle as pkl
-import json
-from pymatgen.core.structure import Structure
-import json
 import pandas as pd
+import argparse
+
 
 def write_poscar(structure,index):
-    name_list=[]
-    count_list=[]
     out = open('data_poscar/'+str(index) + ".vasp", "w")
     site_count={}
     sites_list=[]
@@ -33,18 +26,6 @@ def write_poscar(structure,index):
     out.writelines("\n")
     out.writelines('1.00')
     out.writelines("\n")
-
-    # composition=structure["composition"]
-    # for n in composition.split(' '):
-    #     name=n[0:len(n)-1]
-    #     count=n[-1]
-    #     name_list.append(name)
-    #     count_list.append(count)
-    #     out.write(name)
-    #     out.write(' ')
-    # out.writelines("\n")
-    # out.writelines('1.00')
-    # out.writelines("\n")
 
     unit_cell=structure["unit_cell"]
     for cell in unit_cell:
@@ -73,13 +54,24 @@ def write_poscar(structure,index):
     out.close()
 
 
+def args_parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--start-index', type=int,default=0,  help='Start Index')
+    parser.add_argument('--end-index', type=int,default=10,  help='End Index')
+    args = parser.parse_args()
+    return args
+
+args = args_parse()
+start_index=args.start_index
+end_index=args.end_index
+print(start_index)
+print(end_index)
 out = open("out.txt", "w")
 data=pd.read_csv("oqmd_new.csv").values[:,0]
 property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
-count=1
-for i in range(100000,200000):
+for i in range(start_index,end_index):
 #for i in range(50):
     composition=data[i]
     delta = property[i]
@@ -95,19 +87,6 @@ for i in range(100000,200000):
             structure=list_of_data['data'][0]
             bgap=structure['band_gap']
             delta_dft=structure['delta_e']
-            write_poscar(structure,count)
-            id_property.append([count,delta,bgap])
-            fetched_data.append([composition,delta,delta_dft,bgap])
-            count=count+1
-        else:
-            out.writelines(str(i)+" : "+composition)
-            out.writelines("\n")
+            write_poscar(structure,i+1)
 
-    else:
-        out.writelines(composition)
-        out.writelines("\n")
-my_df = pd.DataFrame(id_property)
-my_df.to_csv('data_poscar/id_prop.csv', index=False, header=False)
-my_df = pd.DataFrame(fetched_data)
-my_df.to_csv('fetched_data.csv', index=False, header=False)
 out.close()
