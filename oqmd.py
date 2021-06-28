@@ -74,8 +74,8 @@ def write_poscar(structure,index):
 
 
 out = open("out.txt", "w")
-data=pd.read_csv("oqmd.csv").values[:,0]
-property=pd.read_csv("oqmd.csv").values[:,5]
+data=pd.read_csv("oqmd_new.csv").values[:,0]
+property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
 count=1
