@@ -86,9 +86,11 @@ for i in range(start_index,end_index):
     if(list_of_data['data'] !=None):
         if (len(list_of_data['data'])>0):
             structure=list_of_data['data'][0]
-            bgap=structure['band_gap']
-            delta_dft=structure['delta_e']
-            write_poscar(structure,i+1)
-
+            # bgap=structure['band_gap']
+            # delta_dft=structure['delta_e']
+            # write_poscar(structure,i+1)
+            pkl_out = open("data_pickel/obj_"+str(i+1), "wb")
+            pkl.dump(structure, pkl_out)
+            pkl_out.close()
 
 out.close()
