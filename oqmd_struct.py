@@ -75,7 +75,7 @@ property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
 for i in range(start_index,end_index):
-    my_file = Path('data_poscar/'+str(index) + ".vasp")
+    my_file = Path('data_poscar/'+str(i) + ".vasp")
     if my_file.is_file():
         continue
     composition=data[i]
