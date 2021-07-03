@@ -2,7 +2,7 @@ from qmpy_rester import *
 import pandas as pd
 import argparse
 import pickle as pkl
-
+import time
 
 def write_poscar(structure,index):
     out = open('data_poscar/'+str(index) + ".vasp", "w")
@@ -57,8 +57,8 @@ def write_poscar(structure,index):
 
 def args_parse():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--start-index', type=int,default=0,  help='Start Index')
-    parser.add_argument('--end-index', type=int,default=10,  help='End Index')
+    parser.add_argument('--start-index', type=int,default=430689,  help='Start Index')
+    parser.add_argument('--end-index', type=int,default=430691,  help='End Index')
     args = parser.parse_args()
     return args
 
@@ -73,7 +73,6 @@ property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
 for i in range(start_index,end_index):
-#for i in range(50):
     composition=data[i]
     delta = property[i]
     print(i, composition)
@@ -82,15 +81,19 @@ for i in range(start_index,end_index):
             # "composition": 'ClW,SrSe'
             "composition": composition
             }
+        t_total = time.time()
         list_of_data = q.get_oqmd_phases(**args)
-    if(list_of_data['data'] !=None):
-        if (len(list_of_data['data'])>0):
-            structure=list_of_data['data'][0]
-            # bgap=structure['band_gap']
-            # delta_dft=structure['delta_e']
-            # write_poscar(structure,i+1)
-            pkl_out = open("data_pickel/obj_"+str(i+1), "wb")
-            pkl.dump(structure, pkl_out)
-            pkl_out.close()
+        print(time.time()-t_total)
+        print(len(list_of_data['data']))
 
-out.close()
+# if(list_of_data['data'] !=None):
+#     if (len(list_of_data['data'])>0):
+#         structure=list_of_data['data'][0]
+#         # bgap=structure['band_gap']
+#         # delta_dft=structure['delta_e']
+#         # write_poscar(structure,i+1)
+#         pkl_out = open("data_pickel/obj_"+str(i+1), "wb")
+#         pkl.dump(structure, pkl_out)
+#         pkl_out.close()
+#
+# out.close()
