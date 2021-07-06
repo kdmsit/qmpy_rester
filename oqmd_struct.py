@@ -83,7 +83,6 @@ for i in range(start_index,end_index):
     print(i, composition)
     with rester.QMPYRester() as q:
         args = {
-            # "composition": 'ClW,SrSe'
             "composition": composition
             }
         list_of_data = q.get_oqmd_phases(**args)
