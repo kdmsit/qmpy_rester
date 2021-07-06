@@ -31,7 +31,7 @@ for i in range(start_index,end_index):
     if my_file.is_file():
         continue
     print(i)
-    out.writeline(str(i))
+    out.writelines(str(i))
 
 
 out.close()
