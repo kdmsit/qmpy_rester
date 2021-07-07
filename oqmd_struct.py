@@ -7,7 +7,7 @@ import pickle as pkl
 
 
 def write_poscar(structure,index):
-    out = open('../data_poscar/'+str(index) + ".vasp", "w")
+    out = open('../data_poscar/'+str(index) + '.vasp', "w")
     site_count={}
     sites_list=[]
     sites = structure["sites"]
@@ -55,6 +55,7 @@ def write_poscar(structure,index):
             out.write(' ')
         out.writelines("\n")
     out.close()
+    print('../data_poscar/'+str(index) + '.vasp')
 
 
 def args_parse():
@@ -80,7 +81,7 @@ for i in range(start_index,end_index):
         continue
     composition=data[i]
     delta = property[i]
-    print(i, composition)
+    print(i+1, composition)
     with rester.QMPYRester() as q:
         args = {
             "composition": composition
