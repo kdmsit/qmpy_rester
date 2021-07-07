@@ -75,7 +75,7 @@ data=pd.read_csv("oqmd_new.csv").values[:,0]
 property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
-for i in range(start_index,end_index):
+for i in range(start_index,len(data)):
     my_file = Path('data_poscar/'+str(i+1) + ".vasp")
     if my_file.is_file():
         continue
