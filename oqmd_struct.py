@@ -7,7 +7,7 @@ import pickle as pkl
 
 
 def write_poscar(structure,index):
-    out = open('../data_poscar/'+str(index) + '.vasp', "w")
+    out = open('data_poscar/'+str(index) + '.vasp', "w")
     site_count={}
     sites_list=[]
     sites = structure["sites"]
@@ -55,7 +55,7 @@ def write_poscar(structure,index):
             out.write(' ')
         out.writelines("\n")
     out.close()
-    print('../data_poscar/'+str(index) + '.vasp')
+    print('data_poscar/'+str(index) + '.vasp')
 
 
 def args_parse():
@@ -76,7 +76,7 @@ property=pd.read_csv("oqmd_new.csv").values[:,5]
 fetched_data=[]
 id_property=[]
 for i in range(start_index,end_index):
-    my_file = Path('../data_poscar/'+str(i+1) + ".vasp")
+    my_file = Path('data_poscar/'+str(i+1) + ".vasp")
     if my_file.is_file():
         continue
     composition=data[i]
