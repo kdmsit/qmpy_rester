@@ -15,8 +15,6 @@ for file in os.listdir('%s'%(path)):
         my_file = Path(filename)
         if my_file.is_file():
             continue
-        if filename.exists():
-            continue
         print(file)
         bulk = read(path + str(file), format='vasp')
         ase.io.write(filename, bulk)
