@@ -10,10 +10,12 @@ path='../data_poscar/'
 list=[]
 for file in os.listdir('%s'%(path)):
     if fnmatch.fnmatch(file, '*.vasp'):
-        print(file)
         name = int(file.split('.')[0])
-        bulk = read(path + str(file), format='vasp')
         filename = '../data_cif/' + str(name) + '.cif'
+        if filename.exists():
+            continue
+        print(file)
+        bulk = read(path + str(file), format='vasp')
         ase.io.write(filename, bulk)
 
 
