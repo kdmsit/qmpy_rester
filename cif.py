@@ -2,7 +2,7 @@ import fnmatch
 import os,sys
 from ase import *
 from ase.io import *
-# from ase.utils import *
+from pathlib import Path
 import numpy as np
 import ase.io.vasp
 
@@ -12,6 +12,9 @@ for file in os.listdir('%s'%(path)):
     if fnmatch.fnmatch(file, '*.vasp'):
         name = int(file.split('.')[0])
         filename = '../data_cif/' + str(name) + '.cif'
+        my_file = Path(filename)
+        if my_file.is_file():
+            continue
         if filename.exists():
             continue
         print(file)
