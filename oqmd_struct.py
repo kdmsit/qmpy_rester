@@ -60,8 +60,8 @@ def write_poscar(structure,index):
 
 def args_parse():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--start-index', type=int,default=0,  help='Start Index')
-    parser.add_argument('--end-index', type=int,default=10,  help='End Index')
+    parser.add_argument('--start-index', type=int,default=500000,  help='Start Index')
+    parser.add_argument('--end-index', type=int,default=616006,  help='End Index')
     args = parser.parse_args()
     return args
 

@@ -6,7 +6,10 @@ from pathlib import Path
 import numpy as np
 import ase.io.vasp
 
-path='../data_poscar/'
+#532067.vasp
+
+# path='../data_poscar/'
+path='data_poscar/'
 list=[]
 for file in os.listdir('%s'%(path)):
     if fnmatch.fnmatch(file, '*.vasp'):
