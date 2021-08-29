@@ -79,20 +79,22 @@ for i in range(start_index,len(data)):
     my_file = Path('../data_poscar/'+str(i+1) + ".vasp")
     if my_file.is_file():
         continue
-    composition=data[i]
-    delta = property[i]
-    print(i+1, composition)
-    with rester.QMPYRester() as q:
-        args = {
-            "composition": composition
-            }
-        list_of_data = q.get_oqmd_phases(**args)
-    if(list_of_data['data'] !=None):
-        if (len(list_of_data['data'])>0):
-            structure=list_of_data['data'][0]
-            bgap=structure['band_gap']
-            delta_dft=structure['delta_e']
-            write_poscar(structure,i+1)
-
-
+    try:
+        composition=data[i]
+        delta = property[i]
+        print(i+1, composition)
+        with rester.QMPYRester() as q:
+            args = {
+                "composition": composition
+                }
+            list_of_data = q.get_oqmd_phases(**args)
+        if(list_of_data['data'] !=None):
+            if (len(list_of_data['data'])>0):
+                structure=list_of_data['data'][0]
+                bgap=structure['band_gap']
+                delta_dft=structure['delta_e']
+                write_poscar(structure,i+1)
+                print("Written :"+str(i+1)+str(composition))
+    except:
+        continue
 out.close()
